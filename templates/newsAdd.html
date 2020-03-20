@@ -1,0 +1,88 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load profile_tags %}
+<div class="wrapper">
+    <div class="container">
+
+        <div class="form-news">
+            <form method="POST" action="{% url 'news:newsAdd' user.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.media}}
+                <div class="forms-news__title">
+                    <p class="">Название новости:</p>
+                    {{form.title}}
+                </div>
+                <div class="forms-news__title">
+                    <p class="">Картинка на обложку:</p>
+                    {{form.image}}
+                </div>
+                <div class="forms-news__small-text">
+                    <p class="">Краткий текст новости:</p>
+                    {{form.small_text}}
+                </div> 
+                <div class="forms-news__text">
+                    <p class="">Текст новости:</p>
+                    {{form.text}} 
+                </div>
+                <div class = "forms-news__request">
+                    <input class="" type="submit" value="Создать" >
+                </div>
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+
+<script>
+ CKEDITOR.on( 'dialogDefinition', function( ev ) {
+    ev.data.definition.resizable = CKEDITOR.DIALOG_RESIZE_NONE;
+});
+
+CKEDITOR.on( 'dialogDefinition', function( ev ) {
+    // Take the dialog window name and its definition from the event data.
+    var dialogName = ev.data.name;
+    var dialogDefinition = ev.data.definition;
+
+    if ( dialogName == 'image' ) {
+        dialogDefinition.onShow = function() {
+            // This code will open the Link tab.
+           
+        };
+    }
+
+    if ( dialogName == 'image' )
+		{
+			// Get a reference to the "Link Info" tab.
+			var infoTab = dialogDefinition.getContents( 'info' );
+            dialogDefinition.removeContents( 'advanced' );
+			// Set the default value for the URL field.
+			var txtWidth = infoTab.get( 'txtWidth' );
+            txtWidth['default'] = '100%';
+            txtWidth['style'] = 'display: none';
+            var txtWidth = infoTab.get( 'txtHeight' );
+            txtWidth['default'] = '100%';
+            txtWidth['style'] = 'display: none';
+		}	
+        
+
+
+
+});
+
+</script>
+
+
+
+
+
+
+
+    </div>
+</div>
+
+{% endblock %}

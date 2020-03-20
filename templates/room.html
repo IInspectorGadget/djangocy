@@ -1,0 +1,80 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="wrapper">
+    <div class="container">
+        <!-- <script>  CSRF_TOKEN = "{{ csrf_token }}";</script>  -->
+        <a href="{% url 'news:chats' user.slug%}"><i class="fas fa-arrow-left"><span>Назад</span></i></a>
+        <div class="chat profile-border">
+            <div class="chat-messages">
+                {% for message in chat.message_set.all %}
+                    <div class="messages-item">
+                        <img src="/media/{{message.author.image}}" alt="">
+                        <div>
+                            <p><span>{{message.author.username}}</span><span>{{message.pub_date}}</span></p>
+                            <p>{{message.message}}</p>
+                        </div>
+                    </div>
+                {% endfor%}
+            </div>
+            <div class="chat-message">
+                <textarea id="chat-textarea" rows= "10" cols="45"></textarea>
+                <input id="message_submit" class="message_submit" type="submit" name="Отпарвить">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var scrollPosition = 10000 
+
+    var roomId = "{{ chat.id }}";
+    var userId = "{{ user.id }}"
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chats/' + roomId + "/"
+    );
+    //получение данных
+    chatSocket.onmessage = (e) => {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        var pub_date = data['pub_date'];
+        var username = data['username'];
+        var img = data['img'];
+        
+        $('.chat-messages').append(
+            '<div class="messages-item"><img src=' + img + 
+            ' alt=""><div><p><span>' + username + '</span><span>' + pub_date +  
+            '</span></p><p>' + message + '</p></div></div>'
+            );
+        $('.chat-messages').scrollTop(scrollPosition+1000);
+    };  
+
+    //закрытие
+    chatSocket.onclose = (e) => {
+        console.error("Chat socket closed unexpectedly");
+    };
+
+    document.querySelector("#chat-textarea").focus();
+    document.querySelector('#chat-textarea').onkeyup = (e) => {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#message_submit').click();
+        }
+    };
+    $('.chat-messages').scrollTop(scrollPosition);
+    
+    //отправка данных
+    document.querySelector('#message_submit').onclick = (e) => {
+        var messageInputDom = document.querySelector('#chat-textarea');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'userId': userId,
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+    
+
+{% endblock %}

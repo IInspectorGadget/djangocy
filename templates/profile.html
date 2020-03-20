@@ -1,0 +1,181 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load profile_tags %}
+<div class="wrapper">
+    <div class="container">
+        {% if user.id == profile.id %}
+        {% else %}
+        
+        {% endif %}
+        <!-- START профиль -->
+        <div class="profile">
+            <!-- START Аватарка -->
+            <div class="profile-left">
+                <div class="image profile-border">
+                    <img class="" src="{{profile.image.url}}" alt="">
+                </div>
+                {% getFriendId user profile as canFriendAdd %}
+                {% checkRequest user profile as requestedFriend %}
+                <div class="requestFriend">
+                    
+                    {% if profile.id == user.id %}
+                    
+                    {% elif canFriendAdd %} 
+                    <p class="requestFriend-title">Уже у вас в друзьях</p>
+                    {% elif requestedFriend %}  
+                    <p class="requestFriend-title">Запрос уже отправлен</p>
+                    {% else %}
+                    <a class="requestFriend-title requestFriend-btn" href="{% url 'news:add'  profile.slug|lower %}">добавить в друзья</a>
+                    {% endif %}
+
+                    {% if user.id == profile.id %}
+                    <a class="requestFriend-title requestFriend-btn" href="{% url 'news:edit'  profile.slug|lower %}">Редактировать профиль</a>
+                    <a class="requestFriend-title requestFriend-btn" href="{% url 'news:chats'  profile.slug|lower %}">Чаты</a>
+                    {% else %}
+                    <p class="requestFriend-title requestFriend-btn">Написать сообщение</p>
+                    {% endif %}
+
+                </div>
+            </div>
+            <!-- END Аватарка -->
+            
+            <!-- START Инфморация -->
+            <div class="profile-right">
+                <div class="profle-directory profile-border">
+                    <div class="profile-container">
+                        <div class="profile-name "><span>Имя:</span>
+                            <p>
+                                {% if profile.showRealName  %}
+                                {{profile.first_name}} {{profile.last_name}} {{profile.patronymic}}
+                                {% if profile.showUsername %}
+                                ({{profile.username}})
+                                {% endif %}
+                                {% else %}
+                                {{profile.username}}
+                                {% endif %}
+                            </p>
+                        </div>
+                    
+                    <div class="profile-birth__day">
+                        <span>Дата рождения:</span>
+                        <p>{{profile.dateBirth}}</p>
+                    </div>
+                    <div class="profile-gender">
+                        <span>Пол:</span>
+                        <p>
+                            {% if profile.gender == 'М'  %}Мужской
+                            {% else %}Женский{% endif %}
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            
+            <!-- END Инфморация -->
+
+            <!-- START Контакты -->
+                <div class="profile-contacts profile-border">
+                    <div class="profile-container">
+                        <span>Телефон:</span><p>{{profile.phone}}</p>
+                        <span>Адррес:</span><p>{{profile.addres}}</p>
+                        <span>Организация:</span><p>{{profile.organization}}</p>
+                        <span>Skype:</span><p>{{profile.skype}}</p>
+                        <span>Email:</span><p>{{profile.email}}</p>
+                        
+
+                        
+                    </div>
+                </div>
+            <!-- END Контакты -->
+            </div>
+
+
+
+
+            <div class="flex-br"></div>
+
+
+
+            <!-- START Список друзей и приглашений -->
+            <div class="profile-friends profile-border">
+                <div class="friends">
+                    
+                    <div class="friends-title"><a>Друзья</a></div>
+                    <ul class="friends-list">
+                        <p class="friends-list-title">Список друзей</p>
+                        {% for friend in profile.friends.all %}
+                        <li class="list-item">
+                            <div>
+                                <img src='{{friend.image.url}}'>
+                                <a href="{% url 'news:profile' friend|lower %}">{{friend}}</a>
+                            </div>
+                            <div>
+                                <a href="{% url 'news:deleteFriend' profile.slug|lower friend|lower %}">delete</a>
+                            </div>
+                        </li>
+                        {% endfor %} 
+
+                        
+                        {% if user.id == profile.id and profile.to_user.all%}
+                        <p class="friends-list-title">Принять друзей:</p>
+                        {% for friend in profile.to_user.all %}
+                        <li class="list-item-accept list-item">
+                            <div>
+                                <img src='{{friend.from_user.image.url}}'>
+                                <a href="{% url 'news:profile' friend.from_user.slug%}">{{friend.from_user.username}}</a>
+                            </div>
+                            <div>
+                                <a href="{% url 'news:accept' friend.from_user.slug %}" class="item-accept fas fa-check"></a>
+                                <a href="{% url 'news:deny' friend.from_user.slug %}" class="item-deny fas fa-times"></a>
+                            </div>
+                        </li>
+                        {% endfor %} 
+                        {% endif %}
+                    </ul>
+                </div>
+
+            </div>
+            <!-- END Список друзей и приглашений -->
+
+        </div>
+        <!-- END профиль -->
+
+        
+
+    </div>
+</div>
+
+<div class="overlay">
+    <div class="popup">
+
+    </div>
+    <div class="close-popup"></div>
+</div>
+
+<script>
+    $('.requestFriend-btn').click(function(){
+        $('.wrapper').css('filter','blur(5px)');
+        $('header').css('filter','blur(5px)');
+
+        $('.overlay').fadeIn();
+        //$(".overlay").addClass('disabled');
+    });
+    
+    $('.close-popup').click(function(){
+        $('.overlay').fadeOut();
+        $('.wrapper').css('filter','none');
+        $('header').css('filter','none');
+        
+    })
+
+    $(document).mouseup(function (e){
+        var popup = $('.popup');
+        if (e.target!=popup[0]&&popup.has(e.target).length === 0){
+            $('.overlay').fadeOut();
+            $('.wrapper').css('filter','none');
+            $('header').css('filter','none');
+        }
+    })
+    
+</script>
+
+{% endblock %}

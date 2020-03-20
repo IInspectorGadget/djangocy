@@ -1,0 +1,104 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load profile_tags %}
+<div class="wrapper">
+    <div class="container">
+        <div class="news-detail">
+            <!-- <div class="news-rating">
+                <p></p>
+            </div> -->
+            <div class="news-content">
+                <div class="news-likes">
+                    <span data-action="like" data-type="news" data-id="{{ new.id }}" id="like" class="news-arrow fas fa-chevron-up" href=""></span>
+                    <span class="news-like-count">{{ new.votes.sum_rating }}</span>
+                    <span data-action="dislike" data-type="news" data-id="{{ new.id }}" id="dislike"  class="news-arrow fas fa-chevron-down" href=""></span>
+
+                </div>
+                <div class="news-heading">
+                    <h1 class="news-title">{{new.title}}</h1>
+                </div>
+                {{new.text|safe}}
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- 
+<ul>
+    <li id="like" data-id="{{ new.id }}" data-type="news" data-action="like" title="Нравится">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        <span data-count="like"></span>
+    </li>
+    <li id="dislike" data-id="{{ new.id }}" data-type="news" data-action="dislike" title="Не нравится">
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+        <span data-count="dislike">{{ new.votes.dislikes.count }}</span>
+    </li>
+</ul> -->
+
+
+<script>  CSRF_TOKEN = "{{ csrf_token}}";</script> 
+<script>
+
+    function like()
+    {
+        var like = $('#like');
+        var type = like.data('type');
+        var pk = like.data('id');
+        var action = like.data('action');
+        var dislike = $('#dislike');
+    
+           
+     
+        $.ajax({
+            url : "/" + type +"/" + pk + "/" + action + "/",
+            type : 'POST',
+            data : { 
+                'obj' : pk,
+                csrfmiddlewaretoken: '{{ csrf_token }}' ,
+            },
+            headers: { 'X-CSRF-TOKEN': CSRF_TOKEN  },
+
+            success : function (json) {
+                $('.news-like-count').text(json.sum_rating)
+                //like.find("[data-count='like']").text(json.like_count);
+                //dislike.find("[data-count='dislike']").text(json.dislike_count);
+            }
+        });
+ 
+        return false;
+    }
+ 
+function dislike()
+{
+    var dislike = $(this);
+    var type = dislike.data('type');
+    var pk = dislike.data('id');
+    var action = dislike.data('action');
+    var like = dislike.prev();
+ 
+    $.ajax({
+        url : "/" + type +"/" + pk + "/" + action + "/",
+        type : 'POST',
+        data : { 
+            'obj' : pk,
+            csrfmiddlewaretoken: '{{ csrf_token }}' ,
+        },
+ 
+        success : function (json) {
+            $('.news-like-count').text(json.sum_rating)
+            //dislike.find("[data-count='dislike']").text(json.dislike_count);
+            //like.find("[data-count='like']").text(json.like_count);
+        }
+    });
+ 
+    return false;
+}
+ 
+// Подключение обработчиков
+$(function() {
+    $('[data-action="like"]').click(like);
+    $('[data-action="dislike"]').click(dislike);
+});
+</script>
+{% endblock %}

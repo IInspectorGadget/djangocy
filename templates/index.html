@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load static %}
+{% load profile_tags %}
+<html lang="Ru-ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% static 'libs/jquery/jquery-3.4.1.min.js' %}"></script>   
+    <link rel="stylesheet" href="{% static 'libs/jquery/plugins/slick/slick.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://kit.fontawesome.com/591e17d896.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+         <div class="container">
+            <div class="header__logo">
+                <a href="{%url 'news:index' %}"><img src="{% static 'images/logo.png' %}" alt=""></a>
+            </div>
+            <nav>
+                <a href="{%url 'news:index' %}" class="nav-item">Главная</a>
+                <a href="{%url 'news:news' %}" class="nav-item">Новости</a>
+            <a href="#" class="nav-item">Форум</a>
+                <a href="#" class="nav-item">Расписание</a>
+                <a href="#" class="nav-item">Информация</a>
+            </nav>
+                {% if user.is_authenticated %}
+                <div data-id="{{user.id}}" class="profile__opinion logout">
+                    <div class="profile__background">
+                        <img src="{{ user.image.url }}" alt="">
+                        <div class="links">
+                            <a href="{% url 'news:profile' user.slug %}">Профиль</a>
+                            <a href="{% url 'logout'%}?next={{request.path}}">Выйти</a>
+                        </div>
+                    </div>
+                </div> 
+                {% else %}
+                <div class="login"><a href="{% url 'login'%}"><span class="fas fa-sign-in-alt"></span>Войти</a></div>
+                {% endif %}
+        </div>
+        <!-- <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p> -->
+    </header>
+    {% block content%}
+    <div class="wrapper">
+        <div class="container">
+            <div class="Myslider">
+                <div style="background-image: url('{% static 'images/news2.jpg' %}')">
+                </div>
+                <div style="background-image: url('{% static 'images/news1.jpg' %}')">
+                </div>
+            </div>
+
+            <div class="news__list">
+                <div class="news__list-flex">
+                    {% for news in news_list %}
+                    <div class="news__list-item">
+                        <div class="item-img">
+                            <figure><img src="{% static 'images/news1.jpg' %}" alt=""></figure>
+                        </div>
+                        <div class="post-metadata">
+                            <time datetime="2020-02-16T17:37:57+03:00">{{news.news_date_pub}}</time>
+                            &nbsp;|&nbsp;
+                            <a href="#"></a>
+                        </div>
+                        <div class="item-title">{{news.news_title}}</div>
+                        <div class="post-footer">
+                            <span class="author">
+                                <img src="" alt="Картинка">
+                                <a href="#">{{news.news_author}}</a> 
+                            </span>
+                            <span class="post-rait">
+                                <span class="likes">{{news.news_likes}}</span>
+                                <span class="comments"></span>
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="{% static 'libs/jquery/plugins/slick/slick.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/slider.js' %}"></script>
+
+</body>
+</html>

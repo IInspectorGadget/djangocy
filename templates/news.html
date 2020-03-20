@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="wrapper">
+    <div class="container">
+        
+       
+       
+        <div class="news__list">
+            <div class="news__list-flex">
+                {% for new in news %}
+                <article class="news__list-item">
+                    <div class="item-img">
+                        <figure><img src="{{new.image.url}}" alt=""></figure>
+                    </div>
+                  
+                    <div class="item-info">
+                        <time datetime="{{new.date_pub}}">{{new.date_pub}}</time>
+                        <div class="item-title">
+                        <a href="{% url 'news:newsDetail' new.id %}">{{new.title}}</a> 
+                        </div>
+                   
+                        <div class="item-small_text">{{new.small_text|safe}}</div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="author">
+                            <a href="{% url 'news:profile' new.author.slug %}">
+                                <img src="{{new.author.image.url}}" alt="">
+                                <p>{{new.author.username}}</p>
+                            </a> 
+                        </div>
+                        <span class="post-rait">
+                            <span class="fas fa-heart">
+                                <span class="likes" >{{new.votes.sum_rating}}</span>
+                            </span>
+                            <span class="comments"></span>
+                        </span>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script>
+    var block_width = $('.container').width();
+    var img_width = $('.news-detail img').width()
+    var img_size = img_width * 100 / block_width
+    img_width = $('.news-detail img').width(img_size + '%')
+</script>
+{% endblock %}
+
+

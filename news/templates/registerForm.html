@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/RegisterStyle.css' %}" />
+    <title>Document</title>
+</head>
+<body>
+    
+    <header>
+        <!-- <a href="" class="logo"><img src="{% static 'images/logo.png' %}" alt=""></a> -->
+        <div class="loginOrReg">
+            <span>У вас уже есть аккаунт?</span>
+            <a href="" class="btn reg">Авторизация</a>
+        </div>
+    </header>
+
+    <div class="wrapper">   
+        <div class="contaier">
+            <div class="form">
+                <h2>Регистрация</h2>
+                
+                <form method="POST" action="{% url 'news:registerPost' %}" enctype="multipart/form-data">
+                    
+                    {% csrf_token %}
+                    <div class="username inputFlex">
+                        <div class="img"></div>
+                        {{form.username}}
+                    </div>
+                    <div class="email inputFlex">
+                        <div class="img"></div>
+                        {{form.email}}
+                    </div>
+                    <div class="password inputFlex">
+                        <div class="img"></div>
+                        {{form.password}}
+                    </div>
+                    
+                    
+                    <input class="btn submit" type="submit" value="Зарегестрироваться" >
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>

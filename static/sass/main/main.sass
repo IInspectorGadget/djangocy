@@ -1,0 +1,800 @@
+@import ../_reset.scss
+@import _common.sass
+
+
+
+a
+    color: black
+
+.container
+    max-width: 1400px
+    margin: 0 auto
+    padding-top: 1px
+    background-color: #fff
+    min-height: calc(100vh - 100px)
+.wrapper
+    background-color: whitesmoke
+header
+    position: relative
+    box-shadow: 0 5px 3px rgba(0,0,0,0.3)
+       
+        
+    .container
+        padding: 0 20px
+        display: flex  
+        justify-content: space-between
+        align-items: center
+        min-height: 100px
+        //background-color: #00ece0
+        //background: linear-gradient(90deg, rgba(0,236,224,0.4) 10%, rgba(0,228,217,0.7) 20%, rgba(0,228,217,0.7) 95%, rgba(0,236,224,0.4) 100%)
+        .header__logo
+            a
+                display: block
+                img
+                    max-width: 250px
+
+        nav
+            max-width: 720px
+            margin: 0px 20px
+            flex-grow: 1
+            flex-wrap: wrap
+            display: flex
+            justify-content: space-around
+            
+            .nav-item
+                &:not(:last-of-type) 
+                    margin-right: 10px
+                
+
+        // .header__login-form
+        
+        //     form
+        //         display: flex
+        //         flex-direction: column
+        //         align-items: flex-start
+                
+        //         .grid-form
+        //             display: grid
+        //             grid-template-rows:  1fr 1fr
+        //             grid-template-columns: 1fr 1fr
+        //             align-items: center
+
+        //             input
+        //                 padding: 4px 4px
+        //             a
+        //                 margin-left: 2px
+        .profile__opinion
+            flex-basis: 20%
+        .login
+            a
+                max-width: 150px
+                margin: 0 auto
+                padding: 0 30px
+                display: block
+                height: 40px
+                line-height: 40px
+                border-radius: 20px
+                cursor: pointer
+                background-color: #00adef
+                color: #fff
+                text-align: center
+                transition: background-color 0.3s
+                &:hover
+                    background-color: #0089be
+                span
+                    margin-right: 10px
+        .logout
+            
+           
+            .profile__background
+
+                display: flex
+                justify-content: center
+                align-items: center
+                width: 150px
+                margin: 0 auto
+                
+                img
+                    
+                    width: 50px
+                    height: 50px
+                    border-radius: 50%
+                    
+                .links
+                    margin-left: 20px
+                    height: 40px
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    justify-content: space-between
+                    a
+                        color: black
+                        transform: color 0.3s
+                        &:hover
+                            color:  #0089be
+                    
+                    
+                
+                        
+                        
+
+
+.news__list
+    padding-top: 1px
+    background-color: white
+    margin: 20px 38px
+    .news__list-flex
+        display: flex
+        flex-wrap: wrap
+        .news__list-item
+            border: 1px solid black
+            background-color: white
+            position: relative
+            margin-bottom: 12px
+            flex-basis: calc(33.333% - 12px)
+            margin-left: 6px
+            margin-right: 6px
+            background-color: #fff
+            display: flex
+            flex-direction: column
+            min-width: 280px
+            .item-img
+                display: flex
+                justify-content: center
+                position: relative
+                overflow: hidden
+                height: 50%
+                figure
+                    overflow: hidden
+                    width: 100% 
+                      
+                img
+                    width: 100%
+                    max-height: 100%
+                    left: 0
+
+            
+            .item-info
+                height: 200px
+                display: flex
+                margin: 10px 20px 0px
+                flex-direction: column
+                time
+                    color: #9c9c9c
+                    margin-bottom: 5px
+                .item-title
+                    word-break: break-word
+                    font: bold 22px 'PT Sans Narrow', Arial, Helvetica, sans-serif
+                    margin-bottom: 10px
+                    line-height: 1
+                
+                    a
+                        position: static
+                        &:hover    
+                            color: #00adef
+                    a::before
+                        content: ""
+                        position: absolute
+                        z-index: 1
+                        top: 0
+                        left: 0
+                        width: 100%
+                        height: 100%
+
+                .item-small_text
+                    word-break: break-word
+                    font-size: 17px
+                    line-height: 1.2
+                    overflow: hidden
+                    text-align: justify
+                    height: 120px
+                    p
+                        height: 100%
+                        overflow: hidden
+            .post-footer
+                display: flex
+                border: 1px solid #eeeeeed5 
+                justify-content: space-between
+                align-items: center
+                padding: 4px 5px
+    
+
+                .author
+                    a
+                        display: flex
+                        align-items: center
+                        position: relative
+                        z-index: 2
+                        color: #9c9c9c
+                        &:hover    
+                         
+                            color: #00adef
+
+                    img
+                        width: 50px
+                        height: 50px
+                        border-radius: 50%
+                    p
+                        margin-left: 10px
+                .post-rait
+                    color: #9c9c9c
+                   
+                    .fa-heart
+                        color: #9c9c9c
+                        font-size: 14px
+                        transition: color 0.14s
+                        
+                    .likes
+                        font-size: 16px
+
+
+
+.Myslider
+    .slick-slide
+        width: 100vw
+        height: 600px
+        display: flex
+        justify-content: center
+        align-items: center
+        background-color:rgba(0,0,0,.3)
+        background-repeat: no-repeat
+        background-position: center
+        background-size: cover
+        &:before 
+            content: ""
+            position: absolute
+            width: 100%
+            height: 100%
+            background: rgba(0,0,0,0.5)
+        &:first-child
+            .image
+                background-size: cover-size
+        &:nth-child(2)
+            background-image: url(../images/news2.jpg)
+            background-size: cover-size
+            
+    .slick-arrow
+        border: 0.7rem solid #a4a4a4
+        width: 2em
+        height: 2em
+        position: absolute
+        top: 50%
+        transform: translateY(-50%) rotate(45deg)
+        transition: transform .4s, border-color .4s linear
+     
+        color: transparent
+        z-index: 100
+        &.slick-prev
+            border-top: none
+            border-right: none
+            left: 150/1920*100%
+        &.slick-next
+            border-bottom: none
+            border-left: none
+            right: 150/1920*100%
+        &:hover
+            border-color: #fff
+            transform: translateY(-50%) rotate(45deg) scale(1.1)
+        &:active
+            transform: translateY(-50%) rotate(45deg)
+    
+    .slick-dots 
+        position: absolute 
+        width: 100%
+        bottom: 4rem 
+        text-align: center
+        
+        li 
+            box-sizing: content-box
+            border-radius: 50%
+            width: 1rem
+            height: 1rem
+            background-color: white
+            display: inline-block
+            background-color: #a4a4a4
+            &:not(:last-child) 
+                margin-right: 1rem
+            &.slick-active
+                border: .2rem solid black
+                background-color: white
+            button
+                width: 100%
+                height: 100%
+                display: block
+                font-size: 0
+                line-height: 0
+                color: transparent
+        
+
+
+
+
+
+
+@media screen and (max-width: 877px)
+    .news__list .news__list-flex .news__list-item
+        flex-basis: calc(50% - 12px)
+
+
+
+.flex-br
+     height: 0px
+     width: 100%
+.profile
+    display: flex
+    //grid-template-columns: 300px auto auto
+    flex-flow: row wrap
+    font-size: 20px
+    margin: 0 5%
+    justify-content: space-between
+    padding-top: 40px
+
+    .profile-left
+        flex: 0 0 240px
+        .image
+            display: flex
+            justify-content: center
+            align-items: center
+            width: 240px
+            height: 230px
+
+            overflow: hidden
+            img
+               
+                width: 220px
+                border-radius: 4px
+        .requestFriend
+            flex: 0 0 240px
+            
+            .requestFriend-title
+                box-shadow: 0 0 6px 0 rgba(0,0,0,.04), 0 4px 10px 0 rgba(13,35,67,.25)
+                height: 40px
+                
+                line-height: 40px
+                border-radius: 4px
+                background-color: #fff
+                color: black
+                text-align: center
+                display: flex
+                justify-content: center
+                align-items: center
+                margin: 0 3px
+                margin-top: 10px
+                font-size: 18px
+                
+                    
+        
+            .requestFriend-btn
+                transition: background-color 0.3s
+                &:hover
+                    background-color: #fafafa
+                    cursor: pointer
+    .profile-right
+        display: flex
+        flex-flow: row wrap
+        font-size: 20px
+        justify-content: space-between
+        max-height: 280px
+        width: calc(100% - 240px)
+        .profle-directory
+            max-height: 90%
+            //flex: 0 0 35%
+            flex: 0 0 calc(50% - 6%)
+            margin-left: 4%
+            p
+                margin-left: 8%
+                &::first-child
+                    margin-top: 20px
+            .profile-name
+                margin-bottom: 20px
+            .profile-birth__day
+                margin-bottom: 20px
+                
+            .profile-gender
+                margin-bottom: 20px
+                
+        .profile-contacts
+            
+            //flex: 0 0 35%
+            flex: 0 0 calc(50% - 2.5%)
+            p
+                margin-left: 8%
+            
+    
+        
+
+
+
+
+    .profile-friends
+        flex: 0 0 240px
+        margin-top: 10px
+        //width: calc(0px + 30%)
+        .friends
+         
+            box-sizing: border-box
+            .friends-title
+                height: 40px
+                line-height: 40px
+                border-radius: 4px 4px 0px 0px
+                background-color: #00adef
+                opacity: .8
+                display: flex
+                justify-content: center
+                align-items: center
+                a
+                    color: #fff
+            .friends-list 
+                background: #f0f7fcf3
+                list-style-type: none
+                margin: 0
+                padding: 0
+                .friends-list-title
+                    text-align: center
+                    border-bottom: 1px solid #DDD
+                .list-item
+                    margin: 0
+                    padding: 0  
+                    width: 100%
+                    height: 60px
+                    background: #fff
+                    border-bottom: 1px solid #DDD
+                    cursor: pointer
+                    display: flex
+                    align-items: center
+                    justify-content: space-between
+                    img
+                        width: 45px
+                        height: 45px
+                        border-radius: 30px
+                        border: 2px solid #AAA
+                        object-fit: cover
+                        margin-left: 5px
+                        margin-right: 10px
+                    a
+                        font-size: 18px
+                    &.selected
+                        background: #43A047
+                        color: white
+                        img 
+                            border-color: white
+                    &:not(.selected):hover
+                        background:#DDD
+
+                    .item-accept
+                        margin-right: 20px
+                        color: green
+                    .item-deny
+                        color: red
+                        margin-right: 20px
+                
+
+                .list-footer
+                    margin-left: 80px
+                    font-size: 14px
+    
+.overlay
+    position: absolute
+    width: 100%
+    height: 100vh
+    top: 0
+    left: 0 
+    display: none
+.popup
+    position: absolute
+    width: 400px
+    left: 50%
+    top: 50%
+    transform: translate(-50%,-50%)
+    padding: 40px
+    box-sizing: border-box
+    background-color: #ff5252
+    color: #fff
+
+
+.contacts-textarea
+    resize: none
+    width: 90%
+    height: 150px
+form .profile input
+    width: 90%
+.requestFriend input.requestFriend-title
+    width: 234px
+    background-color: #00adef !important
+    border: none
+    color: #fff !important
+    opacity: .8
+    transition: opacity 0.3s
+    &:hover
+        opacity: 1
+.profle-directory-edit
+    max-height: 1000px !important
+.profile-right-edit
+    max-height: 1000px !important
+.profile .errorlist
+    font-size: 16px
+    color: red
+    li
+        margin-left: 10%
+.profile-edit
+    padding-top: 10px !important
+
+
+.fa-arrow-left
+    color: #00adef
+    margin-left: 9%
+    margin-top: 30px
+    font: 30px sans-serif
+    span
+        margin-left: 10px
+
+    
+.profile-border
+    // border-radius: 4px
+    // box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8
+    // background-color: #EEE
+    border-radius: 8px
+    box-shadow: 0 0 6px 0 rgba(0,0,0,.04), 0 4px 10px 0 rgba(13,35,67,.25)
+.profile-container
+    margin: 15px 20px
+
+
+.chat
+    width: 85%
+    margin: 10px auto
+    min-height: 80vh
+   
+    li
+        
+        
+       
+        border-bottom: 1px solid #DDD
+        list-style-type: none
+        min-height: 60px
+        transition: background-color 0.2s
+
+        &:hover
+            background-color: whitesmoke
+
+        & > a 
+            display: flex
+            justify-content: space-between
+            padding: 20px 30px
+        
+
+    .chat-meta
+        display: flex
+        align-items: center
+        width: 95%
+        overflow: hidden
+        .logo-name
+            width: 80px
+            border-right: 1px solid #DDD
+            margin-right: 20px
+            img
+                width: 50px
+                height: 50px
+                border-radius: 50%
+            span
+                margin-top: 10px
+                display: block
+        p
+            width: 78%
+    .chat-time
+        border-left: 1px solid #DDD
+        margin-left: 10px
+        display: flex
+
+        align-items: flex-end
+        flex-direction: column
+        min-width: 110px
+        p
+  
+        
+    #message_submit
+        width: 50%
+        margin-left: 25%
+        box-sizing: border-box
+        background-color: 
+        height: 60px
+    #chat-textarea
+        resize: none
+        max-height: 100px
+        overflow-y: auto
+        overflow-x: hidden
+        border-radius: 6px
+        line-height: 18px
+        word-wrap: break-word
+        box-sizing: border-box
+        border: 2px solid #dbdfe4
+        transition: border-bottom-color 0.3s linear
+        width: 50%
+        margin-left: 25%
+.chat-messages
+    display: flex
+    flex-direction: column
+    padding: 50px 0
+    height: 586px
+    width: 100%
+    overflow-y: scroll
+    overflow-x: hidden
+    &::-webkit-scrollbar  
+        width: 5px
+        height: 8px
+        background-color: #fff
+    &::-webkit-scrollbar-thumb  
+        width: 5px
+        height: 80px
+        background-color: #aaa
+    .messages-item
+        display: flex
+        margin: 0 10%
+        border-bottom: 1px solid #DDD
+        padding-bottom: 30px
+        &:not(:first-child)
+            margin-top: 30px
+            
+        & > img
+            height: 50px
+            width: 50px
+            border-radius: 50%
+        & > div 
+            width: 100%
+        p
+            display: flex
+            justify-content: space-between
+        p:first-child
+            line-height: 18px
+            font-size: 18px
+            margin-left: 30px
+            span:last-of-type
+                font-size: 70%
+                color: grey
+                margin-left: 20%
+        p:last-of-type
+            overflow: hidden
+            word-wrap: break-word
+            width: 100%
+            margin-left: 32px
+            margin-top: 20px
+    
+    
+
+        
+        
+.news-detail
+    display: flex
+    // .news-rating
+    //     //max-width: calc((1400px - 979px) / 2 )
+       
+    //     width: 14.5%
+    //     display: flex
+    //     flex-direction: column
+    //     background-color: #fff
+    //     div
+    //         height: 200px
+    //         width: 100px
+    //         background-color: black
+    .news-likes
+        position: absolute
+        top: 0
+        right: -50px
+        display: flex
+        align-items: center
+        flex-direction: column       
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.04), 0 4px 10px 0 rgba(13, 35, 67, 0.25)
+        .news-arrow
+            font-size: 18px
+            padding: 15px
+            color: green
+            cursor: pointer
+        .news-like-count
+            font-size: 20px !important
+
+    .news-content
+        position: relative
+        margin: 0 auto
+        max-width: 979px
+        word-break: break-word
+        padding: 20px 20px
+        border-radius: 0px 0px 8px 8px
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.04), 0 4px 10px 0 rgba(13, 35, 67, 0.25)
+        span
+            font-size: 18px !important
+            line-height: 1.6 !important
+        p
+            margin-block-start: 1em
+            margin-block-end: 1em
+            margin-inline-start: 0px
+            margin-inline-end: 0px
+            font-size: 18px !important
+            line-height: 1.6 !important
+            span
+            img
+
+                
+        ol, ul, dl
+            padding: 0 40px
+            display: block
+            list-style-type: disc
+            margin-block-start: 1em
+            margin-block-end: 1em
+            margin-inline-start: 0px
+            margin-inline-end: 0px
+            font-size: 18px !important
+            line-height: 1.6 !important
+            padding-inline-start: 40px
+        a
+            color: #0782C1
+
+        .news-heading
+            margin: 0 0 20px 0
+            .news-title
+                font: bold 35px 'PT Sans Narrow', Arial, Helvetica, sans-serif
+                border-bottom: 1px solid #DDD
+                padding-bottom: 10px
+            
+
+
+
+.form-news
+    padding: 1px 0px
+    max-width: 979px
+    form
+        font: 20px 'Open Sans', sans-serif
+        
+
+        & > div
+            margin-top: 50px
+        p
+            display: block
+            font-weight: bold
+            color: #00adef
+            margin-bottom: 10px
+        .forms-news__title
+            width: 100%
+            margin-top: 20px
+            input
+                width: 100%
+                height: 42px
+                padding: 6px 12px
+                border: 1px solid #ccc
+                box-sizing: border-box
+        .forms-news__small-text
+            width: 100%
+            p
+        .forms-news__text
+            width: 100%
+            p
+      
+            
+        .forms-news__request
+            display: flex
+            justify-content: flex-end
+            margin-bottom: 30px
+            input
+                font-size: 40px
+                background-color: #00adef
+                text-align: center
+                padding: 0 30px
+                height: 100px
+                width: 400px
+                border-radius: 18px
+                color: #fff
+                border: none
+                margin-right: 60px
+          
+
+
+.news-detail p
+    width: 100% 
+.news-detail img
+    max-width: 100% !important
+    height: auto !important
+
+.django-ckeditor-widget
+    width: 100% 
+
+.test-wsgi
+    height: 220px
+

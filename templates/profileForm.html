@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load profile_tags %}
+<div class="wrapper">
+    <div class="container">
+        <a href="{% url 'news:profile' user.slug %}"><i class="fas fa-arrow-left"><span>Назад</span></i></a>
+        <form method="POST" action="{% url 'news:edit' user.slug|lower %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="profile profile-edit">
+
+            <div class="profile-left">
+                <div class="image profile-border">
+                    <img class="" src="{{user.image.url}}" alt="">
+                </div>
+                <div class="requestFriend">
+                    <input class="requestFriend-title" type="submit" value="СОХРАНИТЬ" >
+                </div>
+            </div>
+
+            <div class="profile-right profile-right-edit">
+                <div class="profle-directory profile-border profle-directory-edit">
+                    <div class="profile-container">
+                        <div class="profile-name "><span>Имя:</span><p>{{form.first_name}}</p>{{form.first_name.errors}}
+                            <span>Фамилия:</span><p>{{form.last_name}}</p>{{form.last_name.errors}}
+                        
+                            <span>Отчество:</span><p>{{form.patronymic}}</p>{{form.patronymic.errors}}
+
+                        </div>
+                        
+                    <div class="profile-birth__day">
+                        <span>Дата рождения:</span>
+                        <p>{{form.dateBirth}}</p>{{form.dateBirth.errors}}
+                    </div>
+                    <div class="profile-gender">
+                        <span>Пол:</span>
+                        <p>{{form.gender}}</p>{{form.gender.errors}}
+                    </div>
+                    </div>
+                </div>
+
+
+
+                <div class="profile-contacts profile-border">
+                    <div class="profile-container">
+                        <span>Телефон:</span><p>{{form.phone}}</p>{{form.phone.errors}}
+                        <span>Адррес:</span><p>{{form.addres}}</p>{{form.addres.errors}}
+                        <span>Организация:</span><p>{{form.organization}}</p>{{form.organization.errors}}
+                        <span>Skype:</span><p>{{form.skype}}</p>{{form.skype.errors}}
+                        <span>Email:</span><p>{{form.email}}</p>{{form.email.errors}}
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+            
+           
+
+        </div>
+
+        </form>
+
+
+        
+    </div>
+</div>
+
+    
+
+{% endblock %}

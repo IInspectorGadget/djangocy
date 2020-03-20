@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load profile_tags %}
+<div class="wrapper">
+    <div class="container">
+        <a href="{% url 'news:profile' user.slug %}"><i class="fas fa-arrow-left"><span>Назад</span></i></a>
+
+        <div class="chat profile-border">
+            {% for chat in chats %}
+            {{chats|dictsort:"last_message_date"}}
+                {% chekUserChat chat user.username as chekUserChat %}
+ 
+                {% if chekUserChat %}
+                    <li class ="li" href="#">
+                        <a href="{% url 'news:chat' user.slug chat.id %}">
+                            <div class="chat-meta">
+                                <div class="logo-name" href="">
+                                    {% for friend in chat.members.all %}
+                                        {% if user.id != friend.id %}
+                                        <img src="/media/{{friend.image}}" alt="">
+                                        <span>{{friend.username}}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <p>{{chat.message_set.last.message}}</p>
+                            </div>
+                            <div class="chat-time">
+                                <p>{{chat.message_set.last.pub_date|time}}</p>
+                                <p class="">{{chat.message_set.last.pub_date|date:"d b Y"}}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+
+    </div>
+</div>
+
+<script>
+
+    
+
+</script>
+
+{% endblock %}
